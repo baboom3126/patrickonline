@@ -1,0 +1,89 @@
+
+
+div{
+  /* border:1px black;
+  border-style: solid; */
+}
+
+.scrollable_div{
+  overflow-y:auto;
+  height:90vh;
+}
+
+.div_block_1{
+  font-size: 20px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  width: 100%;
+}
+
+.div_block_1:hover{
+  background-color: #ffca28;
+}
+
+.centerCss{
+  vertical-align : middle;
+  text-align: center;
+}
+
+.chat_left{
+  word-break:break-word;
+  border: 2px solid #ffca28;
+  border-radius: 20px;  font-size: 18px;
+  width: 80%;
+  text-align: left;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.chat_right{
+  word-break:break-word;
+  border: 2px solid #03a9f4;
+  border-radius: 20px;  font-size: 18px;
+  /* ///// */
+  width: 80%;
+  margin-left: 20%;
+  /* ///// */
+  text-align: right;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.chat_left_span{
+
+}
+
+.chatRoom_block_input_area{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  height:60px;
+  margin-bottom: 0;
+}
+
+#chatRoom_block{
+  height:89vh;
+  position: relative;
+}
+
+.chatRoom_send_div{
+  background-color: #03a9f4;
+  height: 100%;
+}
+.chatRoom_send_div:hover{
+  background-color: #ffca28;
+
+}
+
+#chatRoom_block{
+  border:1px grey;
+  border-radius: 20px;
+  border-style: solid;
+}

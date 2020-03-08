@@ -59,7 +59,7 @@ $(document).ready(function() {
     $("#person_block").css('visibility', 'visible');
     remove_blocks(1);
     classify = 1;
-    $("#person_block").html(appendTest1);
+    $("#person_block").html(appendTest1());
 
   });
 
@@ -67,12 +67,15 @@ $(document).ready(function() {
     $("#person_block").css('visibility', 'visible');
     remove_blocks(1);
     classify = 2;
+    $("#person_block").html(appendTest1());
+
   });
 
   $("#classify_block_3").click(function() {
     $("#person_block").css('visibility', 'visible');
     remove_blocks(1);
     classify = 3;
+    $("#person_block").html(appendTest1());
 
   });
 
@@ -80,6 +83,7 @@ $(document).ready(function() {
     $("#person_block").css('visibility', 'visible');
     remove_blocks(1);
     classify = 4;
+    $("#person_block").html(appendTest1());
 
   });
 ///////////////////////////////
@@ -101,7 +105,7 @@ $(document).ready(function() {
 
 
 });
-function appendTest1(){
+function appendTest1(i){
   return `<div class='div_block_1 centerCss waves-effect' id='person_block_1' onclick='person_block_i(1)'>
     <span>person1</span>
   </div>

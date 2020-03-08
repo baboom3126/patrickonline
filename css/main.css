@@ -15,14 +15,16 @@ div{
   height:78vh;
 }
 .div_block_1{
+  border-radius:30px;
   font-size: 20px;
   padding-top: 35px;
   padding-bottom: 35px;
+  margin-bottom:1%;
   width: 100%;
 }
 
 .div_block_1:hover{
-  background-color: #ffca28;
+  background-color:#eeeeee;
 }
 
 .centerCss{

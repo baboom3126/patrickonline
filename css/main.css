@@ -10,6 +10,10 @@ div{
   height:90vh;
 }
 
+.scrollable_div_for_chatting_area{
+  overflow-y:auto;
+  height:78vh;
+}
 .div_block_1{
   font-size: 20px;
   padding-top: 35px;

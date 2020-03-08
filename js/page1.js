@@ -127,7 +127,17 @@ function appendTest2(i){
         </div>
         <div class='chat_right'>
           <span class='chat_right_span'>testtestsetsetsetsetsetsetsetsettessettesttestsetsetsetsetsetsetsetsettesset</span>
-        </div>
+        </div>        <div class='chat_left'>
+                  <span class='chat_left_span'>我是person${i} ${year}年 問題類型 [${classify}] 我是person${i} ${year}年 問題類型 [${classify}] 我是person${i} ${year}年 問題類型 [${classify}] </span>
+                </div>
+                <div class='chat_right'>
+                  <span class='chat_right_span'>testtestsetsetsetsetsetsetsetsettessettesttestsetsetsetsetsetsetsetsettesset</span>
+                </div>        <div class='chat_left'>
+                          <span class='chat_left_span'>我是person${i} ${year}年 問題類型 [${classify}] 我是person${i} ${year}年 問題類型 [${classify}] 我是person${i} ${year}年 問題類型 [${classify}] </span>
+                        </div>
+                        <div class='chat_right'>
+                          <span class='chat_right_span'>testtestsetsetsetsetsetsetsetsettessettesttestsetsetsetsetsetsetsetsettesset</span>
+                        </div>
       </div><div class='' id='chatRoom_block_chatting_area'>
       <div class='chat_left'>
       <span class='chat_left_span'>我是person${i} ${year}年 問題類型 [${classify}] </span>

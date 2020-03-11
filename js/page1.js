@@ -2,6 +2,28 @@ var year = 0;
 var classify = 0;
 var person = 0;
 
+function remove_background_color(whereToRemove) {
+  switch (whereToRemove) {
+
+    case "year_classify_person":
+      $(".div_block_year").css("background-color","");
+      $(".div_block_classify").css("background-color","");
+      $(".div_block_person").css("background-color","");
+      break;
+
+    case "classify_person":
+      $(".div_block_classify").css("background-color","");
+      $(".div_block_person").css("background-color","");
+      break;
+
+    case "person":
+      $(".div_block_person").css("background-color","");
+
+      break;
+  }
+}
+
+
 $(document).ready(function() {
   console.log("ready!");
 
@@ -13,8 +35,14 @@ $(document).ready(function() {
       $("#person_block").html('');
     }
   }
+
+  ////////////////////////////////
+
   /////////////////////////////////
   $("#year_block_109").click(function() {
+remove_background_color("year_classify_person");
+
+    $("#year_block_109").css('background-color', '#eeeeee');
     $("#classify_block").css('visibility', 'visible');
     remove_blocks(2);
 
@@ -24,6 +52,10 @@ $(document).ready(function() {
   });
 
   $("#year_block_108").click(function() {
+    remove_background_color("year_classify_person");
+
+    $("#year_block_108").css('background-color', '#eeeeee');
+
     $("#classify_block").css('visibility', 'visible');
     remove_blocks(2);
 
@@ -33,6 +65,10 @@ $(document).ready(function() {
   });
 
   $("#year_block_107").click(function() {
+    remove_background_color("year_classify_person");
+
+    $("#year_block_107").css('background-color', '#eeeeee');
+
     $("#classify_block").css('visibility', 'visible');
     remove_blocks(2);
 
@@ -56,6 +92,10 @@ $(document).ready(function() {
   }
   /////////////////////////////////
   $("#classify_block_1").click(function() {
+    remove_background_color("classify_person");
+
+    $("#classify_block_1").css('background-color', '#eeeeee');
+
     $("#person_block").css('visibility', 'visible');
     remove_blocks(1);
     classify = 1;
@@ -64,6 +104,11 @@ $(document).ready(function() {
   });
 
   $("#classify_block_2").click(function() {
+    remove_background_color("classify_person");
+
+    $("#classify_block_2").css('background-color', '#eeeeee');
+
+
     $("#person_block").css('visibility', 'visible');
     remove_blocks(1);
     classify = 2;
@@ -72,6 +117,11 @@ $(document).ready(function() {
   });
 
   $("#classify_block_3").click(function() {
+    remove_background_color("classify_person");
+
+    $("#classify_block_3").css('background-color', '#eeeeee');
+
+
     $("#person_block").css('visibility', 'visible');
     remove_blocks(1);
     classify = 3;
@@ -80,13 +130,17 @@ $(document).ready(function() {
   });
 
   $("#classify_block_4").click(function() {
+    remove_background_color("classify_person");
+
+    $("#classify_block_4").css('background-color', '#eeeeee');
+
     $("#person_block").css('visibility', 'visible');
     remove_blocks(1);
     classify = 4;
     $("#person_block").html(appendTest1());
 
   });
-///////////////////////////////
+  ///////////////////////////////
 
   $("#sendMsg").click(function() {
     console.log("SEND MSG");
@@ -95,35 +149,37 @@ $(document).ready(function() {
     $("#input_msg").val("");
   });
 
-/////////////////////////////
+  /////////////////////////////
 
 
-////////////////////////////////////////
+  ////////////////////////////////////////
 
 
 
 
 
 });
-function appendTest1(i){
-  return `<div class='div_block_1 centerCss waves-effect' id='person_block_1' onclick='person_block_i(1)'>
+
+function appendTest1(i) {
+  return `
+  <div class='div_block_person centerCss waves-effect' id='person_block_1' onclick='person_block_i(1)'>
     <span>person1</span>
   </div>
-  <div class='div_block_1 centerCss waves-effect' id='person_block_2' onclick='person_block_i(2)'>
+  <div class='div_block_person centerCss waves-effect' id='person_block_2' onclick='person_block_i(2)'>
     <span>person2</span>
   </div>
-  <div class='div_block_1 centerCss waves-effect' id='person_block_3' onclick='person_block_i(3)'>
+  <div class='div_block_person centerCss waves-effect' id='person_block_3' onclick='person_block_i(3)'>
     <span>person3</span>
   </div>
-  <div class='div_block_1 centerCss waves-effect' id='person_block_4' onclick='person_block_i(4)'>
+  <div class='div_block_person centerCss waves-effect' id='person_block_4' onclick='person_block_i(4)'>
     <span>person4</span>
   </div>
-  <div class='div_block_1 centerCss waves-effect' id='person_block_5' onclick='person_block_i(5)'>
+  <div class='div_block_person centerCss waves-effect' id='person_block_5' onclick='person_block_i(5)'>
     <span>person5</span>
   </div>`;
 }
 
-function appendTest2(i){
+function appendTest2(i) {
 
   return `
         <div class='chat_left'>
@@ -166,7 +222,10 @@ function appendTest2(i){
                   `;
 }
 
-function person_block_i(i){
+function person_block_i(i) {
+  remove_background_color("person");
+  $("#person_block_"+i).css('background-color', '#eeeeee');
+
   $("#chatRoom_block_chatting_area").html(appendTest2(i));
 
 }

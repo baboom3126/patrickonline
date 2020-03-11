@@ -14,7 +14,7 @@ div{
   overflow-y:auto;
   height:78vh;
 }
-.div_block_1{
+.div_block_year{
   border-radius:30px;
   font-size: 20px;
   padding-top: 35px;
@@ -23,7 +23,31 @@ div{
   width: 100%;
 }
 
-.div_block_1:hover{
+.div_block_classify{
+  border-radius:30px;
+  font-size: 20px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  margin-bottom:1%;
+  width: 100%;
+}
+
+.div_block_person{
+  border-radius:30px;
+  font-size: 20px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  margin-bottom:1%;
+  width: 100%;
+}
+
+.div_block_year:hover{
+  background-color:#eeeeee;
+}
+.div_block_classify:hover{
+  background-color:#eeeeee;
+}
+.div_block_person:hover{
   background-color:#eeeeee;
 }
 

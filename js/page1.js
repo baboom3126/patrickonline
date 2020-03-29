@@ -1,23 +1,49 @@
+// A $( document ).ready() block.
 var year = 0;
 var classify = 0;
 var person = 0;
+var allData = {};
+var userData = {};
+var classifyData = {};
+var gradeData = {};
+///firebase connect ////
+
+var firebaseConfig = {
+  apiKey: "AIzaSyDwzvKnypo8VFFH_HXoVkRn1mIjk78nfnM",
+  authDomain: "test-patrickonline.firebaseapp.com",
+  databaseURL: "https://test-patrickonline.firebaseio.com",
+  projectId: "test-patrickonline",
+  storageBucket: "test-patrickonline.appspot.com",
+  messagingSenderId: "111589178162",
+  appId: "1:111589178162:web:7ebb818b2ffd365905b52b",
+  measurementId: "G-ZHTBSRBGVT"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+var database = firebase.database();
+
+
+
+
+/////
 
 function remove_background_color(whereToRemove) {
   switch (whereToRemove) {
 
     case "year_classify_person":
-      $(".div_block_year").css("background-color","");
-      $(".div_block_classify").css("background-color","");
-      $(".div_block_person").css("background-color","");
+      $(".div_block_year").css("background-color", "");
+      $(".div_block_classify").css("background-color", "");
+      $(".div_block_person").css("background-color", "");
       break;
 
     case "classify_person":
-      $(".div_block_classify").css("background-color","");
-      $(".div_block_person").css("background-color","");
+      $(".div_block_classify").css("background-color", "");
+      $(".div_block_person").css("background-color", "");
       break;
 
     case "person":
-      $(".div_block_person").css("background-color","");
+      $(".div_block_person").css("background-color", "");
 
       break;
   }
@@ -40,7 +66,7 @@ $(document).ready(function() {
 
   /////////////////////////////////
   $("#year_block_109").click(function() {
-remove_background_color("year_classify_person");
+    remove_background_color("year_classify_person");
 
     $("#year_block_109").css('background-color', '#eeeeee');
     $("#classify_block").css('visibility', 'visible');
@@ -152,7 +178,6 @@ remove_background_color("year_classify_person");
   /////////////////////////////
 
 
-  ////////////////////////////////////////
 
 
 
@@ -224,8 +249,41 @@ function appendTest2(i) {
 
 function person_block_i(i) {
   remove_background_color("person");
-  $("#person_block_"+i).css('background-color', '#eeeeee');
+  $("#person_block_" + i).css('background-color', '#eeeeee');
 
   $("#chatRoom_block_chatting_area").html(appendTest2(i));
 
 }
+
+//////////////////////get user list////////
+
+database.ref("line/user/").on("value", function(snapshot) {
+
+  var snapshotVal = snapshot.val();
+  for (i in snapshotVal) {
+    console.log(snapshot.child(`${i}/userDetail`).val());
+    var userDetail = snapshot.child(`${i}/userDetail`).val();
+    var MsgDetail = snapshot.child(`${i}/MsgDetail`).val();
+    var displayName = userDetail.displayName;
+    var grade = userDetail.grade;
+    var pictureUrl = userDetail.pictureUrl;
+    var probClassify = MsgDetail.DetailInfo.probClassify;
+
+    // gradeData[grade] = grade;
+    // gradeData[grade][probClassify] = probClassify;
+
+    console.log(gradeData);
+
+
+
+  }
+});
+
+
+
+
+//////////////push msg//////////////
+
+const linePushMsgUrl = 'https://script.google.com/macros/s/AKfycbwjHGXynZWfvRDiZDfVFAO_fRqVc4X8zVSBX27ZzTxgqYpVH7Y/exec?';
+
+//https://script.google.com/macros/s/AKfycbwjHGXynZWfvRDiZDfVFAO_fRqVc4X8zVSBX27ZzTxgqYpVH7Y/exec?userId=U4080d143dd9a5a5913517908120e4cd9&msgContent=213

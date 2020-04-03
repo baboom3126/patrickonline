@@ -254,6 +254,7 @@ function person_block_i(element) {
 // });
 
 function appendPersonList(var_classify, var_year, classify_block) {
+  database.ref("line/user/").off("value");
 
   console.log(`classify:${classify} year:${year}`);
   database.ref("line/user/").on("value", function(snapshot) {
@@ -296,6 +297,8 @@ function appendPersonList(var_classify, var_year, classify_block) {
 }
 
 function appendChatroomMsg(personId) {
+
+
   database.ref("line/user/" + currentUserId).off("value", onValueChange);
 
   var onValueChange =function(snapshot){
@@ -343,8 +346,10 @@ function appendChatroomMsg(personId) {
 
 
 function getAllPerson(theYear) {
+  database.ref("line/user/").off("value");
 
-  database.ref("line/user/").once("value", function(snapshot) {
+
+  database.ref("line/user/").on("value", function(snapshot) {
     var appendData = '';
     $("#person_block").html('');
 

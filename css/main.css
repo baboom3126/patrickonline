@@ -4,6 +4,14 @@ div{
   /* border:1px black;
   border-style: solid; */
 }
+.material-icons{
+  color:red;
+}
+
+.myImg{
+  height:25%;
+  width: 25%;
+}
 
 .scrollable_div{
   overflow-y:auto;
@@ -15,28 +23,28 @@ div{
   height:78vh;
 }
 .div_block_year{
-  border-radius:30px;
+  border-radius:10px;
   font-size: 20px;
-  padding-top: 35px;
-  padding-bottom: 35px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   margin-bottom:1%;
   width: 100%;
 }
 
 .div_block_classify{
-  border-radius:30px;
+  border-radius:10px;
   font-size: 20px;
-  padding-top: 35px;
-  padding-bottom: 35px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   margin-bottom:1%;
   width: 100%;
 }
 
 .div_block_person{
-  border-radius:30px;
+  border-radius:10px;
   font-size: 20px;
-  padding-top: 35px;
-  padding-bottom: 35px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   margin-bottom:1%;
   width: 100%;
 }

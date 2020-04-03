@@ -6,6 +6,7 @@ var allData = {};
 var userData = {};
 var classifyData = {};
 var gradeData = {};
+var currentUserId = '';
 ///firebase connect ////
 
 var firebaseConfig = {
@@ -109,7 +110,7 @@ $(document).ready(function() {
       var tempinnerHtml = classify_block_DOM.children[i].innerHTML;
       // if(tempinnerHtml.includes("[")){
       tempinnerHtml = tempinnerHtml.replace(/\[109\]|\[108\]|\[107\]/gi, "");
-      classify_block_DOM.children[i].innerHTML = `[${y}]` + tempinnerHtml;
+      classify_block_DOM.children[i].innerHTML = tempinnerHtml;
       // }
       // else{
       //   classify_block_DOM.children[i].innerHTML= `[${y}]`+tempinnerHtml;
@@ -125,7 +126,8 @@ $(document).ready(function() {
     $("#person_block").css('visibility', 'visible');
     remove_blocks(1);
     classify = 1;
-    $("#person_block").html(appendTest1());
+
+    appendPersonList(classify, year, 1);
 
   });
 
@@ -138,7 +140,8 @@ $(document).ready(function() {
     $("#person_block").css('visibility', 'visible');
     remove_blocks(1);
     classify = 2;
-    $("#person_block").html(appendTest1());
+
+    appendPersonList(classify, year, 2);
 
   });
 
@@ -151,7 +154,7 @@ $(document).ready(function() {
     $("#person_block").css('visibility', 'visible');
     remove_blocks(1);
     classify = 3;
-    $("#person_block").html(appendTest1());
+    appendPersonList(classify, year, 3);
 
   });
 
@@ -163,19 +166,43 @@ $(document).ready(function() {
     $("#person_block").css('visibility', 'visible');
     remove_blocks(1);
     classify = 4;
-    $("#person_block").html(appendTest1());
+    appendPersonList(classify, year, 4);
+
+  });
+
+
+  $("#classify_block_all").click(function() {
+    remove_background_color("classify_person");
+
+    $("#classify_block_all").css('background-color', '#eeeeee');
+
+    $("#person_block").css('visibility', 'visible');
+    remove_blocks(1);
+
+    getAllPerson(year);
+
 
   });
   ///////////////////////////////
 
   $("#sendMsg").click(function() {
-    console.log("SEND MSG");
     var msgValue = $("#input_msg").val();
+    if ($('#chatRoom_block_chatting_area').html() != "" && msgValue!="") {
+
+      $.get(`https://script.google.com/macros/s/AKfycbwjHGXynZWfvRDiZDfVFAO_fRqVc4X8zVSBX27ZzTxgqYpVH7Y/exec?userId=${currentUserId}&msgContent=${msgValue}`, function(data, status) {
+        console.log("Data: " + data + "\nStatus: " + status);
+        if(status!='success'){alert('傳送失敗');}
+      });
+    } else {
+      console.log('NO USER AVAILABLE');
+    }
+
     console.log(msgValue);
     $("#input_msg").val("");
-  });
 
-  /////////////////////////////
+
+
+  });
 
 
 
@@ -185,105 +212,175 @@ $(document).ready(function() {
 
 });
 
-function appendTest1(i) {
-  return `
-  <div class='div_block_person centerCss waves-effect' id='person_block_1' onclick='person_block_i(1)'>
-    <span>person1</span>
-  </div>
-  <div class='div_block_person centerCss waves-effect' id='person_block_2' onclick='person_block_i(2)'>
-    <span>person2</span>
-  </div>
-  <div class='div_block_person centerCss waves-effect' id='person_block_3' onclick='person_block_i(3)'>
-    <span>person3</span>
-  </div>
-  <div class='div_block_person centerCss waves-effect' id='person_block_4' onclick='person_block_i(4)'>
-    <span>person4</span>
-  </div>
-  <div class='div_block_person centerCss waves-effect' id='person_block_5' onclick='person_block_i(5)'>
-    <span>person5</span>
-  </div>`;
-}
 
-function appendTest2(i) {
 
-  return `
-        <div class='chat_left'>
-          <span class='chat_left_span'>我是person${i} ${year}年 問題類型 [${classify}] 我是person${i} ${year}年 問題類型 [${classify}] 我是person${i} ${year}年 問題類型 [${classify}] </span>
-        </div>
-        <div class='chat_right'>
-          <span class='chat_right_span'>testtestsetsetsetsetsetsetsetsettessettesttestsetsetsetsetsetsetsetsettesset</span>
-        </div>        <div class='chat_left'>
-                  <span class='chat_left_span'>我是person${i} ${year}年 問題類型 [${classify}] 我是person${i} ${year}年 問題類型 [${classify}] 我是person${i} ${year}年 問題類型 [${classify}] </span>
-                </div>
-                <div class='chat_right'>
-                  <span class='chat_right_span'>testtestsetsetsetsetsetsetsetsettessettesttestsetsetsetsetsetsetsetsettesset</span>
-                </div>        <div class='chat_left'>
-                          <span class='chat_left_span'>我是person${i} ${year}年 問題類型 [${classify}] 我是person${i} ${year}年 問題類型 [${classify}] 我是person${i} ${year}年 問題類型 [${classify}] </span>
-                        </div>
-                        <div class='chat_right'>
-                          <span class='chat_right_span'>testtestsetsetsetsetsetsetsetsettessettesttestsetsetsetsetsetsetsetsettesset</span>
-                        </div>
-      </div><div class='' id='chatRoom_block_chatting_area'>
-      <div class='chat_left'>
-      <span class='chat_left_span'>我是person${i} ${year}年 問題類型 [${classify}] </span>
-      </div>
-            <div class='chat_right'>
-              <span class='chat_right_span'>testtestsetsetsetsetsetsetsetsettessettesttestsetsetsetsetsetsetsetsettesset</span>
-            </div>
-          </div><div class='' id='chatRoom_block_chatting_area'>
-          <div class='chat_left'>
-          <span class='chat_left_span'>我是person${i} ${year}年 問題類型 [${classify}] </span>
-          </div>
-                <div class='chat_right'>
-                  <span class='chat_right_span'>testtestsetsetsetsetsetsetsetsettessettesttestsetsetsetsetsetsetsetsettesset</span>
-                </div>
-              </div><div class='' id='chatRoom_block_chatting_area'>
-              <div class='chat_left'>
-              <span class='chat_left_span'>我是person${i} ${year}年 問題類型 [${classify}] </span>
-              </div>
-                    <div class='chat_right'>
-                      <span class='chat_right_span'>testtestsetsetsetsetsetsetsetsettestesttestsetsetsetsetsetsetsetsettessetset</span>
-                    </div>
-                  `;
-}
 
-function person_block_i(i) {
+
+function person_block_i(element) {
   remove_background_color("person");
-  $("#person_block_" + i).css('background-color', '#eeeeee');
+  $(`#${element.id}`).css('background-color', '#eeeeee');
+  currentUserId = element.id;
 
-  $("#chatRoom_block_chatting_area").html(appendTest2(i));
+  database.ref(`line/user/${element.id}/MsgDetail/DetailInfo/isRead`).set(0)
+
+  appendChatroomMsg(`${element.id}`);
 
 }
 
 //////////////////////get user list////////
 
-database.ref("line/user/").on("value", function(snapshot) {
+// database.ref("line/user/").on("value", function(snapshot) {
+//
+//   var snapshotVal = snapshot.val();
+//   for (i in snapshotVal) {
+//     console.log(snapshot.child(`${i}/userDetail`).val());
+//     var userDetail = snapshot.child(`${i}/userDetail`).val();
+//     var MsgDetail = snapshot.child(`${i}/MsgDetail`).val();
+//     var displayName = userDetail.displayName;
+//     var grade = userDetail.grade;
+//     var pictureUrl = userDetail.pictureUrl;
+//     var probClassify = MsgDetail.DetailInfo.probClassify;
+//
+//     // gradeData[grade] = grade;
+//     // gradeData[grade][probClassify] = probClassify;
+//
+//     console.log(gradeData);
+//
+//
+//
+//   }
+// });
 
-  var snapshotVal = snapshot.val();
-  for (i in snapshotVal) {
-    console.log(snapshot.child(`${i}/userDetail`).val());
-    var userDetail = snapshot.child(`${i}/userDetail`).val();
-    var MsgDetail = snapshot.child(`${i}/MsgDetail`).val();
-    var displayName = userDetail.displayName;
-    var grade = userDetail.grade;
-    var pictureUrl = userDetail.pictureUrl;
-    var probClassify = MsgDetail.DetailInfo.probClassify;
+function appendPersonList(var_classify, var_year, classify_block) {
 
-    // gradeData[grade] = grade;
-    // gradeData[grade][probClassify] = probClassify;
+  console.log(`classify:${classify} year:${year}`);
+  database.ref("line/user/").on("value", function(snapshot) {
+    var appendData = '';
+    $("#person_block").html('');
 
-    console.log(gradeData);
+    var snapshotVal = snapshot.val();
+    for (i in snapshotVal) {
+
+      // console.log(snapshot.child(`${i}/userDetail`).val());
+      var userDetail = snapshot.child(`${i}/userDetail`).val();
+      var MsgDetail = snapshot.child(`${i}/MsgDetail`).val();
+      var displayName = userDetail.displayName;
+      var grade = userDetail.grade;
+      var pictureUrl = userDetail.pictureUrl;
+      var probClassify = MsgDetail.DetailInfo.probClassify;
+      var isRead = MsgDetail.DetailInfo.isRead;
+      // gradeData[grade] = grade;
+      // gradeData[grade][probClassify] = probClassify;
+
+      if (grade.includes(var_year) && probClassify == var_classify) {
+        if (isRead == 1) { //////not yet read
+          appendData += `<div class='div_block_person centerCss waves-effect card-panel' id='${i}' onclick='person_block_i(this)'>
+          <img class="myImg circle" src="${pictureUrl}">
+                        <span>${displayName}</span><i class="material-icons">notifications</i>
+                      </div>`;
+        } else if (isRead == 0) {
+          appendData += `<div class='div_block_person centerCss waves-effect card-panel' id='${i}' onclick='person_block_i(this)'>
+          <img class="myImg circle" src="${pictureUrl}">
+                        <span>${displayName}</span>
+                      </div>`;
+        }
+      }
+
+    }
+    $("#person_block").html(appendData);
+
+  });
+
+}
+
+function appendChatroomMsg(personId) {
+
+  database.ref("line/user/" + personId).on("value", function(snapshot) {
+    var appendData = '';
+    $('#chatRoom_block_chatting_area').html('');
+
+    document.getElementById('chatRoom_block_chatting_area').innerHTML = '';
+
+    var msgContent = snapshot.child('MsgDetail/MsgContent').val();
+    var msg = '';
+    for (i in msgContent) {
+
+      var msgTimestampInnerContent = snapshot.child(`MsgDetail/MsgContent/${i}`).val();
+      var message = msgTimestampInnerContent.message;
+      var isMe = msgTimestampInnerContent.isMe;
+      var id = msgTimestampInnerContent.id;
+      var type = msgTimestampInnerContent.type;
+
+      if (isMe == 0) {
+        appendData += `        <div class='chat_left'>
+                  <span class='chat_left_span'>${message}</span>
+                </div>`;
+      } else if (isMe == 1) {
+        appendData += `        <div class='chat_right'>
+                  <span class='chat_right_span'>${message}</span>
+                </div>`;
+      }
+
+    }
+    $('#chatRoom_block_chatting_area').html(appendData);
+    var objDiv = document.getElementById("chatRoom_block_chatting_area");
+    objDiv.scrollTop = objDiv.scrollHeight;
+
+  });
+
+}
 
 
 
-  }
-});
 
 
 
 
+
+
+function getAllPerson(theYear) {
+
+  database.ref("line/user/").once("value", function(snapshot) {
+    var appendData = '';
+    $("#person_block").html('');
+
+    var snapshotVal = snapshot.val();
+    for (i in snapshotVal) {
+
+      // console.log(snapshot.child(`${i}/userDetail`).val());
+      var userDetail = snapshot.child(`${i}/userDetail`).val();
+      var MsgDetail = snapshot.child(`${i}/MsgDetail`).val();
+      var displayName = userDetail.displayName;
+      var grade = userDetail.grade;
+      var pictureUrl = userDetail.pictureUrl;
+      var probClassify = MsgDetail.DetailInfo.probClassify;
+      var isRead = MsgDetail.DetailInfo.isRead;
+      // gradeData[grade] = grade;
+      // gradeData[grade][probClassify] = probClassify;
+
+      if (grade.includes(theYear)) {
+        if (isRead == 1) { //////not yet read
+          appendData += `<div class='div_block_person centerCss waves-effect card-panel' id='${i}' onclick='person_block_i(this)'>
+          <img class="myImg circle" src="${pictureUrl}">
+                        <span>${displayName}</span><i class="material-icons">notifications</i>
+                      </div>`;
+        } else if (isRead == 0) {
+          appendData += `<div class='div_block_person centerCss waves-effect card-panel' id='${i}' onclick='person_block_i(this)'>
+          <img class="myImg circle" src="${pictureUrl}">
+                        <span>${displayName}</span>
+                      </div>`;
+        }
+      }
+
+    }
+    $("#person_block").html(appendData);
+
+  });
+
+
+}
 //////////////push msg//////////////
 
 const linePushMsgUrl = 'https://script.google.com/macros/s/AKfycbwjHGXynZWfvRDiZDfVFAO_fRqVc4X8zVSBX27ZzTxgqYpVH7Y/exec?';
 
-//https://script.google.com/macros/s/AKfycbwjHGXynZWfvRDiZDfVFAO_fRqVc4X8zVSBX27ZzTxgqYpVH7Y/exec?userId=U4080d143dd9a5a5913517908120e4cd9&msgContent=213
+// https://script.google.com/macros/s/AKfycbwjHGXynZWfvRDiZDfVFAO_fRqVc4X8zVSBX27ZzTxgqYpVH7Y/exec?userId=U4080d143dd9a5a5913517908120e4cd9&msgContent=213

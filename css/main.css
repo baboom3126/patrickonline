@@ -68,7 +68,7 @@ div{
   word-break:break-word;
   border: 2px solid #ffca28;
   border-radius: 20px;  font-size: 18px;
-  width: 80%;
+  width: fit-content;
   text-align: left;
   padding-left: 5px;
   padding-right: 5px;
@@ -83,8 +83,8 @@ div{
   border: 2px solid #03a9f4;
   border-radius: 20px;  font-size: 18px;
   /* ///// */
-  width: 80%;
-  margin-left: 20%;
+  width: fit-content;
+  margin-left: auto;
   /* ///// */
   text-align: right;
   padding-left: 5px;

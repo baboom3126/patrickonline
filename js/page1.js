@@ -64,7 +64,7 @@ $(document).ready(function() {
   }
 
   ////////////////////////////////
-
+12
   /////////////////////////////////
   $("#year_block_109").click(function() {
     remove_background_color("year_classify_person");
@@ -219,11 +219,13 @@ $(document).ready(function() {
 function person_block_i(element) {
   remove_background_color("person");
   $(`#${element.id}`).css('background-color', '#eeeeee');
-  currentUserId = element.id;
+
 
   database.ref(`line/user/${element.id}/MsgDetail/DetailInfo/isRead`).set(0)
 
   appendChatroomMsg(`${element.id}`);
+
+  currentUserId = element.id;
 
 }
 
@@ -294,8 +296,9 @@ function appendPersonList(var_classify, var_year, classify_block) {
 }
 
 function appendChatroomMsg(personId) {
+  database.ref("line/user/" + currentUserId).off("value", onValueChange);
 
-  database.ref("line/user/" + personId).on("value", function(snapshot) {
+  var onValueChange =function(snapshot){
     var appendData = '';
     $('#chatRoom_block_chatting_area').html('');
 
@@ -326,7 +329,8 @@ function appendChatroomMsg(personId) {
     var objDiv = document.getElementById("chatRoom_block_chatting_area");
     objDiv.scrollTop = objDiv.scrollHeight;
 
-  });
+  }
+  database.ref("line/user/" + personId).on("value", onValueChange);
 
 }
 

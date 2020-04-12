@@ -8,17 +8,29 @@ var classifyData = {};
 var gradeData = {};
 var currentUserId = '';
 ///firebase connect ////
-
+//正式
 var firebaseConfig = {
-  apiKey: "AIzaSyDwzvKnypo8VFFH_HXoVkRn1mIjk78nfnM",
-  authDomain: "test-patrickonline.firebaseapp.com",
-  databaseURL: "https://test-patrickonline.firebaseio.com",
-  projectId: "test-patrickonline",
-  storageBucket: "test-patrickonline.appspot.com",
-  messagingSenderId: "111589178162",
-  appId: "1:111589178162:web:7ebb818b2ffd365905b52b",
-  measurementId: "G-ZHTBSRBGVT"
+  apiKey: "AIzaSyB0ubktQDa5zCthkUg_jqSrdMYCbI1kScQ",
+  authDomain: "patrickonline-c822d.firebaseapp.com",
+  databaseURL: "https://patrickonline-c822d.firebaseio.com",
+  projectId: "patrickonline-c822d",
+  storageBucket: "patrickonline-c822d.appspot.com",
+  messagingSenderId: "627065328438",
+  appId: "1:627065328438:web:df0de48d43a348323e1997",
+  measurementId: "G-V684NQ13H7"
 };
+
+//////測試
+// var firebaseConfig = {
+//   apiKey: "AIzaSyDwzvKnypo8VFFH_HXoVkRn1mIjk78nfnM",
+//   authDomain: "test-patrickonline.firebaseapp.com",
+//   databaseURL: "https://test-patrickonline.firebaseio.com",
+//   projectId: "test-patrickonline",
+//   storageBucket: "test-patrickonline.appspot.com",
+//   messagingSenderId: "111589178162",
+//   appId: "1:111589178162:web:7ebb818b2ffd365905b52b",
+//   measurementId: "G-ZHTBSRBGVT"
+// };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
@@ -253,6 +265,7 @@ function person_block_i(element) {
 //   }
 // });
 
+
 function appendPersonList(var_classify, var_year, classify_block) {
   database.ref("line/user/").off("value");
 
@@ -263,6 +276,7 @@ function appendPersonList(var_classify, var_year, classify_block) {
 
     var snapshotVal = snapshot.val();
     for (i in snapshotVal) {
+      try{
 
       // console.log(snapshot.child(`${i}/userDetail`).val());
       var userDetail = snapshot.child(`${i}/userDetail`).val();
@@ -288,8 +302,13 @@ function appendPersonList(var_classify, var_year, classify_block) {
                       </div>`;
         }
       }
-
-    }
+    }catch(e){
+      appendData+=`<div class='div_block_person centerCss waves-effect card-panel' id='${i}' onclick='person_block_i(this)'>
+      <img class="myImg circle" src="">
+                    <span>NO NAME??</span><i class="material-icons">notifications</i>
+                  </div>`
+  }
+  }
     $("#person_block").html(appendData);
 
   });
@@ -310,7 +329,7 @@ function appendChatroomMsg(personId) {
     var msgContent = snapshot.child('MsgDetail/MsgContent').val();
     var msg = '';
     for (i in msgContent) {
-
+      try{
       var msgTimestampInnerContent = snapshot.child(`MsgDetail/MsgContent/${i}`).val();
       var message = msgTimestampInnerContent.message;
       var isMe = msgTimestampInnerContent.isMe;
@@ -327,7 +346,10 @@ function appendChatroomMsg(personId) {
                 </div>`;
       }
 
+    }catch(e){
+      appendData+="ERROR";
     }
+  }
     $('#chatRoom_block_chatting_area').html(appendData);
     var objDiv = document.getElementById("chatRoom_block_chatting_area");
     objDiv.scrollTop = objDiv.scrollHeight;
@@ -355,7 +377,7 @@ function getAllPerson(theYear) {
 
     var snapshotVal = snapshot.val();
     for (i in snapshotVal) {
-
+      try{
       // console.log(snapshot.child(`${i}/userDetail`).val());
       var userDetail = snapshot.child(`${i}/userDetail`).val();
       var MsgDetail = snapshot.child(`${i}/MsgDetail`).val();
@@ -380,7 +402,11 @@ function getAllPerson(theYear) {
                       </div>`;
         }
       }
-
+    }catch(e){
+      appendData += `<div class='div_block_person centerCss waves-effect card-panel' id='${i}' onclick='person_block_i(this)'>
+      <img class="myImg circle" src="" >
+                    <span>NO NAME??</span><i class="material-icons">notifications</i>
+                  </div>`;    }
     }
     $("#person_block").html(appendData);
 

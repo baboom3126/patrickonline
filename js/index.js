@@ -9,28 +9,28 @@ var gradeData = {};
 var currentUserId = '';
 ///firebase connect ////
 //正式
-// var firebaseConfig = {
-//   apiKey: "AIzaSyB0ubktQDa5zCthkUg_jqSrdMYCbI1kScQ",
-//   authDomain: "patrickonline-c822d.firebaseapp.com",
-//   databaseURL: "https://patrickonline-c822d.firebaseio.com",
-//   projectId: "patrickonline-c822d",
-//   storageBucket: "patrickonline-c822d.appspot.com",
-//   messagingSenderId: "627065328438",
-//   appId: "1:627065328438:web:df0de48d43a348323e1997",
-//   measurementId: "G-V684NQ13H7"
-// };
+var firebaseConfig = {
+  apiKey: "AIzaSyB0ubktQDa5zCthkUg_jqSrdMYCbI1kScQ",
+  authDomain: "patrickonline-c822d.firebaseapp.com",
+  databaseURL: "https://patrickonline-c822d.firebaseio.com",
+  projectId: "patrickonline-c822d",
+  storageBucket: "patrickonline-c822d.appspot.com",
+  messagingSenderId: "627065328438",
+  appId: "1:627065328438:web:df0de48d43a348323e1997",
+  measurementId: "G-V684NQ13H7"
+};
 
 //////測試
-var firebaseConfig = {
-  apiKey: "AIzaSyDwzvKnypo8VFFH_HXoVkRn1mIjk78nfnM",
-  authDomain: "test-patrickonline.firebaseapp.com",
-  databaseURL: "https://test-patrickonline.firebaseio.com",
-  projectId: "test-patrickonline",
-  storageBucket: "test-patrickonline.appspot.com",
-  messagingSenderId: "111589178162",
-  appId: "1:111589178162:web:7ebb818b2ffd365905b52b",
-  measurementId: "G-ZHTBSRBGVT"
-};
+// var firebaseConfig = {
+//   apiKey: "AIzaSyDwzvKnypo8VFFH_HXoVkRn1mIjk78nfnM",
+//   authDomain: "test-patrickonline.firebaseapp.com",
+//   databaseURL: "https://test-patrickonline.firebaseio.com",
+//   projectId: "test-patrickonline",
+//   storageBucket: "test-patrickonline.appspot.com",
+//   messagingSenderId: "111589178162",
+//   appId: "1:111589178162:web:7ebb818b2ffd365905b52b",
+//   measurementId: "G-ZHTBSRBGVT"
+// };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
@@ -201,7 +201,7 @@ $(document).ready(function() {
     var msgValue = $("#input_msg").val();
     if ($('#chatRoom_block_chatting_area').html() != "" && msgValue!="") {
 
-      $.get(`https://script.google.com/macros/s/AKfycbwjHGXynZWfvRDiZDfVFAO_fRqVc4X8zVSBX27ZzTxgqYpVH7Y/exec?userId=${currentUserId}&msgContent=${msgValue}`, function(data, status) {
+      $.get(`https://script.google.com/macros/s/AKfycbwOGDcCA0IVJefDXPHQ0JaMWvFQlnJCbYhWGIzqxNdrTW_P-F2A/exec?userId=${currentUserId}&msgContent=${msgValue}`, function(data, status) {
         console.log("Data: " + data + "\nStatus: " + status);
         if(status!='success'){alert('傳送失敗');}
       });
@@ -436,6 +436,6 @@ function getAllPerson(theYear) {
 }
 //////////////push msg//////////////
 
-const linePushMsgUrl = 'https://script.google.com/macros/s/AKfycbwjHGXynZWfvRDiZDfVFAO_fRqVc4X8zVSBX27ZzTxgqYpVH7Y/exec?';
+const linePushMsgUrl = 'https://script.google.com/macros/s/AKfycbwOGDcCA0IVJefDXPHQ0JaMWvFQlnJCbYhWGIzqxNdrTW_P-F2A/exec';
 
-// https://script.google.com/macros/s/AKfycbwjHGXynZWfvRDiZDfVFAO_fRqVc4X8zVSBX27ZzTxgqYpVH7Y/exec?userId=U4080d143dd9a5a5913517908120e4cd9&msgContent=213
+// https://script.google.com/macros/s/AKfycbwOGDcCA0IVJefDXPHQ0JaMWvFQlnJCbYhWGIzqxNdrTW_P-F2A/exec?userId=U4080d143dd9a5a5913517908120e4cd9&msgContent=213

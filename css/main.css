@@ -1,4 +1,6 @@
-
+textarea{
+  height:100px;
+}
 
 div{
   /* border:1px black;
@@ -20,7 +22,7 @@ div{
 
 .scrollable_div_for_chatting_area{
   overflow-y:auto;
-  height:78vh;
+  height:75vh;
 }
 .div_block_year{
   border-radius:10px;
@@ -102,7 +104,7 @@ div{
   width: 100%;
   position: absolute;
   bottom: 0;
-  height:60px;
+  height:100px;
   margin-bottom: 0;
 }
 

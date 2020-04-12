@@ -204,6 +204,9 @@ $(document).ready(function() {
       $.get(`https://script.google.com/macros/s/AKfycbwOGDcCA0IVJefDXPHQ0JaMWvFQlnJCbYhWGIzqxNdrTW_P-F2A/exec?userId=${currentUserId}&msgContent=${msgValue}`, function(data, status) {
         console.log("Data: " + data + "\nStatus: " + status);
         if(status!='success'){alert('傳送失敗');}
+        else if("fail"==data){
+          alert("error");
+        }
       });
     } else {
       console.log('NO USER AVAILABLE');

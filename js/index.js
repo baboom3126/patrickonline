@@ -8,6 +8,8 @@ var classifyData = {};
 var gradeData = {};
 var currentUserId = '';
 var loginstatus =0;
+var currentUserName='';
+
 ///firebase connect ////
 //正式
 var firebaseConfig = {
@@ -42,6 +44,7 @@ database.ref("account").on("value", function(snapshot) {
   swal.close();
   var username = sessionStorage.getItem('username');
   var hash = sessionStorage.getItem('hash');
+  currentUserName = username;
   // console.log(username+hash);
   var accountList = snapshot.val();
   for(i in accountList){
@@ -227,7 +230,7 @@ $('#a_logout').click(function(){
     var msgValue = $("#input_msg").val();
     if ($('#chatRoom_block_chatting_area').html() != "" && msgValue!="") {
 
-      $.get(`https://script.google.com/macros/s/AKfycbwOGDcCA0IVJefDXPHQ0JaMWvFQlnJCbYhWGIzqxNdrTW_P-F2A/exec?userId=${currentUserId}&msgContent=${msgValue}`, function(data, status) {
+      $.get(`https://script.google.com/macros/s/AKfycbwOGDcCA0IVJefDXPHQ0JaMWvFQlnJCbYhWGIzqxNdrTW_P-F2A/exec?userId=${currentUserId}&msgContent=輔導老師${currentUserName.split('admin')[1]}號:${msgValue}`, function(data, status) {
         console.log("Data: " + data + "\nStatus: " + status);
         if(status!='success'){alert('傳送失敗');}
         else if("fail"==data){

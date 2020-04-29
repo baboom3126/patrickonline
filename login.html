@@ -220,7 +220,7 @@
       console.log(hash);
       database.ref("account/").on("value", function(snapshot) {
         var accountList = snapshot.val();
-        console.log(accountList);
+        // console.log(accountList);
         for(i in accountList){
           console.log(accountList[i]);
           if(accountList[i].name==username&&accountList[i].pwd==hash){

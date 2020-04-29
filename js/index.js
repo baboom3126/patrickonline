@@ -42,7 +42,7 @@ database.ref("account").on("value", function(snapshot) {
   swal.close();
   var username = sessionStorage.getItem('username');
   var hash = sessionStorage.getItem('hash');
-  console.log(username+hash);
+  // console.log(username+hash);
   var accountList = snapshot.val();
   for(i in accountList){
     if(accountList[i].name==username&&accountList[i].pwd==hash){

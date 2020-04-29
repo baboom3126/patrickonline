@@ -7,6 +7,7 @@ var userData = {};
 var classifyData = {};
 var gradeData = {};
 var currentUserId = '';
+var loginstatus =0;
 ///firebase connect ////
 //正式
 var firebaseConfig = {
@@ -36,7 +37,25 @@ firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
+////////
+database.ref("account").on("value", function(snapshot) {
+  swal.close();
+  var username = sessionStorage.getItem('username');
+  var hash = sessionStorage.getItem('hash');
+  console.log(username+hash);
+  var accountList = snapshot.val();
+  for(i in accountList){
+    if(accountList[i].name==username&&accountList[i].pwd==hash){
+      $('div').show();
+      loginstatus=1;
+      return;
+    }
+  }
+  if(loginstatus==0){
+    window.location.href='./login.html?redirect';
+  }
 
+})
 
 
 /////
@@ -195,6 +214,13 @@ $(document).ready(function() {
 
 
   });
+
+  /////////////////
+$('#a_logout').click(function(){
+  sessionStorage.clear();
+  window.location.href = './login.html';
+});
+
   ///////////////////////////////
 
   $("#sendMsg").click(function() {

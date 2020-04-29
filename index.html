@@ -9,13 +9,17 @@
   <link rel="stylesheet" href="./css/materialize.min.css">
   <link rel="stylesheet" href="./css/main.css">
   <script src="./js/materialize.min.js"></script>
+  <link rel="stylesheet" href="./css/sweetalert2.min.css">
+  <script src="./js/sweetalert2.min.js"></script>
 
   <!-- <script src="./js/firebase-app.js"></script> -->
   <!-- <script src="./js/firebase-analytics.js"></script> -->
   <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script type="text/javascript">
 
+  </script>
 
 </head>
 
@@ -26,7 +30,7 @@
       <ul class="right hide-on-med-and-down">
         <li><a href="#">BLANK</a></li>
         <li><a href="#">管理</a></li>
-        <li class="active"><a href="#">登出</a></li>
+        <li class="active"><a href="#" id="a_logout">登出</a></li>
       </ul>
     </div>
   </nav>
@@ -143,7 +147,11 @@
 
   </div>
 </body>
+<script type="text/javascript">
+$('div').hide();
+swal.showLoading()
 
+</script>
   <script src="./js/index.js"></script>
   <script src="./js/queryline.js"></script>
 

@@ -98,8 +98,23 @@ $(document).ready(function() {
   }
 
   ////////////////////////////////
-12
+
   /////////////////////////////////
+
+$("#outerDiv_show_all_people").click(function() {
+  remove_background_color("year_classify_person");
+
+  $("#outerDiv_show_all_people").css('background-color', '#eeeeee');
+  $("#classify_block").css('visibility', 'hidden');
+  remove_blocks(2);
+
+  year = 0;
+  getAllYearAllPerson();
+
+});
+
+
+
   $("#year_block_109").click(function() {
     remove_background_color("year_classify_person");
 
@@ -446,6 +461,72 @@ function getAllPerson(theYear) {
       // gradeData[grade][probClassify] = probClassify;
 
       if (grade.includes(theYear)) {
+        if (isRead == 1) { //////not yet read
+          appendData += `<div class='div_block_person centerCss waves-effect card-panel' id='${i}' onclick='person_block_i(this)'>
+          <img class="myImg circle" src="${pictureUrl}">
+                        <span>${displayName}</span><i class="material-icons">notifications</i>
+                      </div>`;
+        } else{
+          appendData += `<div class='div_block_person centerCss waves-effect card-panel' id='${i}' onclick='person_block_i(this)'>
+          <img class="myImg circle" src="${pictureUrl}">
+                        <span>${displayName}</span>
+                      </div>`;
+        }
+      }
+
+    }
+    $("#person_block").html(appendData);
+
+  });
+
+
+}
+
+
+
+
+
+
+
+
+function getAllYearAllPerson() {
+  database.ref("line/user/").off("value");
+
+
+  database.ref("line/user/").on("value", function(snapshot) {
+    var appendData = '';
+    $("#person_block").html('');
+
+    var snapshotVal = snapshot.val();
+    for (i in snapshotVal) {
+      var displayName="";
+      var grade="";
+      var pictureUrl="";
+      var probClassify="";
+      var isRead="";
+
+      // console.log(snapshot.child(`${i}/userDetail`).val());
+      var userDetail = snapshot.child(`${i}/userDetail`).val();
+      var MsgDetail = snapshot.child(`${i}/MsgDetail`).val();
+      if(snapshot.child(`${i}/userDetail`).hasChild("displayName")){
+        var displayName = userDetail.displayName;
+      }
+      if(snapshot.child(`${i}/userDetail`).hasChild("grade")){
+        var grade = userDetail.grade;
+      }
+      if(snapshot.child(`${i}/userDetail`).hasChild("pictureUrl")){
+        var pictureUrl = userDetail.pictureUrl;
+      }
+      if(snapshot.child(`${i}/MsgDetail`).hasChild("DetailInfo")){
+        var probClassify = MsgDetail.DetailInfo.probClassify;
+      }
+      if(snapshot.child(`${i}/MsgDetail`).hasChild("DetailInfo")){
+        var isRead = MsgDetail.DetailInfo.isRead;
+      }
+      // gradeData[grade] = grade;
+      // gradeData[grade][probClassify] = probClassify;
+
+      if (grade.includes('')) {
         if (isRead == 1) { //////not yet read
           appendData += `<div class='div_block_person centerCss waves-effect card-panel' id='${i}' onclick='person_block_i(this)'>
           <img class="myImg circle" src="${pictureUrl}">

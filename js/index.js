@@ -556,7 +556,7 @@ function getAllYearAllPerson() {
 }
 
 function getLineImageInSwal(id){
-$.get('http://paishienglish.com/line/image/'+id,function(data,status){
+$.get('https://paishienglish.com/line/image/'+id,function(data,status){
 
   swal.fire({html:`<img src="${data}" width="100%">`});
 })

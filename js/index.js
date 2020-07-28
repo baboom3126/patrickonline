@@ -392,10 +392,17 @@ function appendChatroomMsg(personId) {
       var id = msgTimestampInnerContent.id;
       var type = msgTimestampInnerContent.type;
 
-      if (isMe == 0) {
+      if (isMe == 0) {        ///對方的訊息
+
+        if(type=='text'){
         appendData += `        <div class='chat_left'>
                   <span class='chat_left_span'>${message}</span>
                 </div>`;
+        }else if(type == 'image'){
+          appendData += `<div class='chat_left'>
+                    <a class='chat_left_span' href='#' onclick='javascript:getLineImageInSwal(${message})'>點我查看圖片</a>
+                  </div>`;
+        }
       } else if (isMe == 1) {
         appendData += `        <div class='chat_right'>
                   <span class='chat_right_span'>${message}</span>
@@ -546,6 +553,13 @@ function getAllYearAllPerson() {
   });
 
 
+}
+
+function getLineImageInSwal(id){
+$.get('http://paishienglish.com/line/image/'+id,function(data,status){
+
+  swal.fire({html:`<img src="${data}" width="100%">`});
+})
 }
 //////////////push msg//////////////
 

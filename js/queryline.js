@@ -17,3 +17,6 @@ $.ajax(settings).done(function (response) {
   console.log(response);
 });
 }
+
+
+//$.get('http://paishienglish.com/line/image/12394407096934',function(data,status){console.log(data)})
